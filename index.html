@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Look Before You Leap: Unveiling the Power of GPT-4V in Robotic Vision-Language Planning">
+  <meta name="keywords" content="Robotic Planning, GPT-4V(ision)">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title style="letter-spacing: 0.1em; font-variant: small-caps;">ViLa</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV4ZJ9PVSV"></script>  
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-FV4ZJ9PVSV');
+  </script>
+
+  <script>
+
+    function SpatialUpdateInteractive() {
+      var task = document.getElementById("spatial_layout-interative-menu").value;
+
+      console.log("spatial layout", task)
+      var video = document.getElementById("spatial_layout-interactive-video");
+      video.src = "media/robot-videos/spatial-layout/" + task + ".mp4"
+      video.play();
+    }
+    function AttributeUpdateInteractive() {
+      var task = document.getElementById("complex_attribute-interative-menu").value;
+
+      console.log("complex attribute", task)
+      var video = document.getElementById("complex_attribute-interactive-video");
+      video.src = "media/robot-videos/complex-attribute/" + task + ".mp4"
+      video.play();
+    }
+    function GoalUpdateInteractive() {
+      var task = document.getElementById("goal-interative-menu").value;
+
+      console.log("versatile goals", task)
+      var video = document.getElementById("versatile_goals-interactive-video");
+      video.src = "media/robot-videos/versatile_goals/" + task + ".mp4"
+      video.play();
+      var img = document.getElementById("spatial_layout-interactive-image");
+      img.src = "media/robot-videos/versatile_goals/goal-images/" + task + ".jpg"
+      var goal_type = document.getElementById("goal-type");
+      if (task == "fruit-platter" || task == "sushi") {
+        goal_type.innerHTML = "Goal Type: Real Image";
+      } else if (task == "jigsaw" || task == "sketch") {
+        goal_type.innerHTML = "Goal Type: Drawing";
+      } else if (task == "make-table") {
+        goal_type.innerHTML = "Goal Type: Image + Language";
+      } else {
+        goal_type.innerHTML = "Goal Type: Pointing Finger";
+      }
+    }
+
+    function BlockUpdateInteractive() {
+      var task = document.getElementById("block-interative-menu").value;
+
+      console.log("blocks", task)
+      var video = document.getElementById("block-interactive-video");
+      video.src = "media/simulation-videos/blocks-bowls/" + task + ".mp4"
+      video.play();
+      var block_instruction = document.getElementById("block-instruction");
+      if (task == "stack-blocks") {
+        block_instruction.innerHTML = "Stack all the blocks";
+      } else if (task == "put-blocks-on-corner-side") {
+        block_instruction.innerHTML = "Put all the blocks on the top side";
+      } else if (task == "put-blocks-matching-colors") {
+        block_instruction.innerHTML = "Put all the blocks on the bowls with matching colors";
+      } else if (task == "put-blocks-mismatching-colors") {
+        block_instruction.innerHTML = "Put the blocks on the bowls with mismatched colors";
+      } else if (task == "put-blocks-different-corners") {
+        block_instruction.innerHTML = "Put all the blocks on the different corners";
+      } else if (task == "stack-blocks-cool-colors") {
+        block_instruction.innerHTML = "Stack only the blocks of cool colors";
+      } else if (task == "stack-blocks-warm-colors") {
+        block_instruction.innerHTML = "Stack only the blocks of warm colors";
+      } else if (task == "sort-primary-color-blocks") {
+        block_instruction.innerHTML = "Stack only the blocks of RGB colors on the left side";
+      }
+    }
+
+    function LetterUpdateInteractive() {
+      var task = document.getElementById("letter-interative-menu").value;
+
+      console.log("blocks", task)
+      var video = document.getElementById("letter-interactive-video");
+      video.src = "media/simulation-videos/letters/" + task + ".mp4"
+      video.play();
+      var block_instruction = document.getElementById("letter-instruction");
+      if (task == "put-letters-alphabetical-order") {
+        block_instruction.innerHTML = "Put the letters on the tables in alphabetical orders";
+      } else if (task == "spell-word") {
+        block_instruction.innerHTML = "Spell as much of \"bread\" as you can";
+      } else if (task == "separate-vowels") {
+        block_instruction.innerHTML = "Sort the vowels from the remaining letters in alphabetical sequence to the bottom side";
+      } else if (task == "put-letters-reverse-alphabetical-order") {
+        block_instruction.innerHTML = "Put the letters on the tables in reverse alphabetical order";
+      } else if (task == "spell-sport") {
+        block_instruction.innerHTML = "Correctly spell out a sport using the present letters";
+      } else if (task == "sort-symmetrical-letters") {
+        block_instruction.innerHTML = "Sort all the vertically symmetrical letters alphabetically on the bottom side";
+      } else if (task == "separate-consonants") {
+        block_instruction.innerHTML = "Sort the consonants from the remaining letters in alphabetical sequence to the bottom side";
+      } else if (task == "sort-letters-less-than-d") {
+        block_instruction.innerHTML = "Sort the letters less than \"D\" according to ASCII on the bottom side";
+      }
+    }
+
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body onload="updateInteractive();">
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-fullhd">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Look Before You Leap: Unveiling the Power of<br>GPT-4V in Robotic Vision-Language Planning</h1>
+          <!-- <h3 class="title is-4 conference-authors"><a target="_blank" href="https://www.corl2023.org/">CoRL 2023 (Oral)</a></h3> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a target="_blank" href="https://yingdong-hu.github.io/">Yingdong Hu</a><sup>1, 2, 3*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.com/citations?user=IhZxOR4AAAAJ&hl=en&oi=ao">Fanqi Lin</a><sup>1, 2, 3*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://tongzhangthu.github.io/">Tong Zhang</a><sup>1, 2, 3</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://ericyi.github.io/">Li Yi</a><sup>1, 2, 3</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://yang-gao.weebly.com/">Yang Gao</a><sup>1, 2, 3</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Tsinghua University,</span>
+            <span class="author-block"><sup>2</sup>Shanghai Artificial Intelligence Laboratory,</span>
+            <span class="author-block"><sup>3</sup>Shanghai Qi Zhi Institute</span>
+          </div>
+
+          <div class="is-size-6 publication-authors"> *Equal Contribution </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <!-- TODO -->
+                <a target="_blank" href="ViLa.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+            <!-- Arxiv Link. -->
+            <span class="link-block">
+              <!-- TODO -->
+              <a target="_blank" href="https://arxiv.org/abs/2307.05973"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>ArXiv</span>
+              </a>
+            </span>
+
+            <!-- Video Link. -->
+            <!-- <span class="link-block">
+              <a target="_blank" href="https://youtu.be/Yvn4eR05A3M"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-youtube"></i>
+                </span>
+                <span>Video</span>
+              </a>
+            </span> -->
+
+            <!-- Code Link. -->
+            <span class="link-block">
+              <!-- TODO -->
+              <a target="_blank" href="https://github.com/huangwl18/VoxPoser"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code(Coming Soon)</span>
+                </a>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-fullhd">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered  is-centered">
+          <video id="teaser" autoplay muted loop height="70%" width="70%">
+            <source src="media/videos/teaser_video.mp4"
+                    type="video/mp4">
+          </video>
+          </br>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+        <!-- <span class="dperact">VoxPoser</span> extracts <b>affordances</b> and <b>constraints</b> from large language models and vision-language models<br>to compose 3D value maps, which are used by motion planners to <b>zero-shot synthesize</b> trajectories for everyday manipulation tasks. -->
+        <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> is a simple and effective method for long-horizon robotic task planning. By directly integrating vision into the reasoning and planning process, <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> can solve a variety of complex, long-horizon tasks both in <b>real-world</b> and <b>simulated</b> settings.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/spatial-layout/take-marvel-model-1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/spatial-layout/bring-empty-plate.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+           <video poster="" autoplay muted loop height="100%">
+             <source src="media/robot-videos/spatial-layout/pour-chips-unseen.mp4"
+                     type="video/mp4">
+           </video>
+         </div>
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/complex-attribute/art-class.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/complex-attribute/righteous-character.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/complex-attribute/stack-plates.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/versatile_goals/sushi.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/versatile_goals/point-plate.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+       <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/versatile_goals/make-table.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+       <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/visual_feedback/find-stapler-2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+       <div class="item">
+          <video poster="" autoplay muted loop height="100%">
+            <source src="media/robot-videos/visual_feedback/interact.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<h2 class="subtitle has-text-centered">
+</br>
+  <!-- VoxPoser can <b>zero-shot synthesize</b> trajectories for real-world manipulation tasks with an <b>open-set</b> of free-form language instructions and an <b>open-set</b> of objects. -->
+  <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> demonstrates the capability to solve a wide array of real-world, everyday manipulation tasks in a <b>zero-shot</b> manner, <br>
+  efficiently handling diverse <b>open-set instructions and objects</b>.
+</h2>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-bottom: 1em;">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this study, we are interested in imbuing robots with the capability of physically-grounded task planning.
+            Recent advancements have shown that large language models (LLMs) possess extensive knowledge useful in robotic tasks, especially in reasoning and planning. 
+            However, LLMs are constrained by their lack of world grounding and dependence on external affordance models to perceive environmental information, which cannot jointly reason with LLMs. 
+            We argue that a task planner should be an inherently grounded, unified multimodal system.
+            To this end, we introduce Robotic <b>Vi</b>sion-<b>La</b>nguage Planning <span style="letter-spacing: 0.1em;">(<b>V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</b>)</span></span>, a novel approach for long-horizon robotic planning that leverages vision-language models (VLMs) to generate a  sequence of actionable steps.
+            <span style="letter-spacing: 0.1em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> directly integrates perceptual data into its reasoning and planning process, enabling a profound understanding of commonsense knowledge in the visual world, including spatial layouts and object attributes.
+            It also supports flexible multimodal goal specification and naturally incorporates visual feedback.
+            Our extensive evaluation, conducted in both real-robot and simulated environments, demonstrates <span style="letter-spacing: 0.1em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span>'s superiority over existing LLM-based planners, highlighting its effectiveness in a wide array of open-world manipulation tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+  </div>
+
+  <!-- Paper video. -->
+  <!-- <br>
+  <br>
+
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+      <div class="container has-text-centered"><h2 class="title is-3" style="margin-bottom: 1em;">Video</h2></div>
+      
+      <div class="publication-video">
+        <iframe src="https://www.youtube.com/embed/Yvn4eR05A3M"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div> -->
+
+</section>
+
+<!-- Method + common sense -->
+<section class="section">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+
+
+    <!-- Animation. -->
+    <div class="rows is-centered ">
+      <div class="row is-full-width">
+        <div class="container has-text-centered">
+          <h2 class="title is-3" style="margin-bottom: 1em;"><span class="dperact" style="letter-spacing: 0.1em;">ViLa</span></h2>
+        </div>
+
+        <!-- Interpolating. -->
+        <div class="content has-text-justified">
+        <!-- <br> -->
+        </div>
+        <!-- <img src="media/videos/method_figure.gif" class="interpolation-image" /> -->
+        <!-- <img src="media/figures/method.jpg" class="interpolation-image" /> -->
+        <video src="media/videos/method.mp4" class="interpolation-image" loop autoplay muted></video>
+          <p class="content has-text-justified">
+            Given a language instruction and current visual observation, we leverage a VLM (GPT-4V) to comprehend the environment scene through chain-of-though reasoning, subsequently generating a sequence of actionable steps. The first step of this plan is then executed by a primitive policy. Finally, the step that has been executed is added to the finished plan, enabling a closed-loop planning method in dynamic environments.
+          </p>
+          
+        </br>
+        </br>
+
+        <!--/ Re-rendering. -->
+        <div class="container has-text-centered">
+          <h2 class="title is-3" style="margin-bottom: 1em;">Comprehension of Conmmon Sense in the Visual World</h2>
+        </div>
+        <p class="content has-text-centered">
+          <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> excels in complex tasks that demand an understanding of spatial layouts or object attributes. This kind of commonsense knowledge pervades nearly every task of interest in robotics, but previous LLM-based planners consistently fall short in this regard.
+        </p>
+        <div class="columns">
+          <div class="column has-text-centered">
+
+            Spatial Layouts
+            <div class="select is-small is-rounded">     
+              <select id="spatial_layout-interative-menu" onchange="SpatialUpdateInteractive()">
+              <option value="pour-chips-unseen" selected="selected">"Pour Chips (Unseen)"</option>
+              <option value="pour-chips-seen">"Pour Chips (Seen)"</option>
+              <option value="bring-pepsi-unseen">"Bring Pepsi Can (Unseen) V1"</option>
+              <option value="bring-pepsi-unseen-2">"Bring Pepsi Can (Unseen) V2"</option>
+              <option value="bring-pepsi-seen">"Bring Pepsi Can (Seen)"</option>
+              <option value="take-marvel-model-1">"Take Out Marvel Model V1"</option>
+              <option value="take-marvel-model-2">"Take Out Marvel Model V2"</option>
+              <option value="take-marvel-model-3">"Take Out Marvel Model V3"</option>
+              <option value="bring-empty-plate">"Bring Empty Plate"</option>
+              </select>
+            </div>
+          </div>
+          <div class="column has-text-centered">
+
+            Object Attributes
+            <div class="select is-small is-rounded">     
+              <select id="complex_attribute-interative-menu" onchange="AttributeUpdateInteractive()">
+              <option value="righteous-character" selected="selected">"Pick Righteous Characters"</option>
+              <option value="fresh-fruit-1">"Pick Fresh Fruits V1"</option>
+              <option value="fresh-fruit-2">"Pick Fresh Fruits V2"</option>
+              <option value="stack-plates">"Stack Plates Steadily"</option>
+              <option value="art-class">"Prepare Art Class"</option>
+              <option value="put-object-in-box">"Fit Objects In Box"</option>
+              <option value="trash-classify">"Garbage Classification"</option>
+              <option value="play-table">"Prepare Play Area"</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="columns">
+          <div class="column is-half has-text-centered">
+            <p style="text-align:center;">
+              <video id="spatial_layout-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+                <source src="media/robot-videos/spatial-layout/pour-chips-unseen.mp4" type="video/mp4">
+              </video>
+            </p>
+          </div>
+          <div class="column is-half has-text-centered">
+            <p style="text-align:center;">
+              <video id="complex_attribute-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+                <source src="media/robot-videos/complex-attribute/righteous-character.mp4" type="video/mp4">
+              </video>
+            </p>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method + versatile goals -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="rows">
+    <!-- Animation. -->
+    <div class="rows is-centered ">
+      <div class="row is-full-width">
+        <div class="container has-text-centered"><h2 class="title is-3" style="margin-bottom: 1em;">Versatile Goal Specifications</h2></div>
+        <p class="content has-text-centered">
+          <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> supports flexible multimodal goal specification approaches. It is capable of utilizing not just language instrctions but also diverse forms of goal images, and even a blend of both language and images, to define objectives effectively.
+        </p>
+        <div class="columns">
+          <div class="column has-text-centered">
+
+            Versatile Goals 
+            <div class="select is-small is-rounded">     
+              <select id="goal-interative-menu" onchange="GoalUpdateInteractive()">
+              <option value="sushi" selected="selected">"Arrange sushi"</option>
+              <option value="jigsaw">"Arrange Jigsaw Pieces"</option>
+              <option value="point-plate">"Pick Vegetables"</option>
+              <option value="make-table">"Tidy Up Study Desk"</option>
+              <option value="sketch">"Vegetable Placement"</option>
+              <option value="fruit-platter">"Make Fruit Platter"</option>
+              <option value="point-table">"Relocate Desk Items"</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column is-4 has-text-centered">
+            <p style="text-align:center;">
+              <img id="spatial_layout-interactive-image" src="media/robot-videos/versatile_goals/goal-images/sushi.jpg" 
+                   style="width:100%; height:auto; max-height:100%;" alt="Description of the image">
+            </p>
+            <p style="text-align:center">
+              Goal Image
+            </p>
+            <p style="text-align:center" id="goal-type">
+              Goal Type: Real Image
+            </p>
+          </div>
+          <div class="column is-8 has-text-centered">
+            <p style="text-align:center;">
+              <video id="versatile_goals-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+                <source src="media/robot-videos/versatile_goals/sushi.mp4" type="video/mp4">
+              </video>
+            </p>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- visual feedback -->
+<section class="section">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+      <!-- <h2 class="title is-3">Visual Feedback</h2> -->
+
+      <div class="container has-text-centered">
+        <h2 class="title is-3" style="margin-bottom: 1em;">Visual Feedback</h2>
+      </div>
+      
+      <p class="content has-text-centered">
+        <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> effectively utilizes visual feedback in an intuitive and natural way, enabling robust closed-loop planning in dynamic environments.
+      </p>
+      
+      <div class="columns">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            loop
+            width="99%">
+            <source src="media/robot-videos/visual_feedback/stack-blocks-1.mp4" 
+            type="video/mp4">
+          </video>
+          <p style="text-align:center">
+            Stack Blocks
+          </p>
+        </div>
+    
+        <div class="column has-text-centered">
+          <video id="dist2"
+            controls
+            muted
+            autoplay
+            loop
+            width="99%">
+            <source src="media/robot-videos/visual_feedback/interfere.mp4" 
+            type="video/mp4">
+          </video>
+          <p style="text-align:center">
+            Pack Chip Bags
+          </p>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            loop
+            width="99%">
+            <source src="media/robot-videos/visual_feedback/find-cat-food-1.mp4" 
+            type="video/mp4">
+          </video>
+          <p style="text-align:center">
+            Find Cat Food
+          </p>
+        </div>
+    
+        <div class="column has-text-centered">
+          <video id="dist2"
+            controls
+            muted
+            autoplay
+            loop
+            width="99%">
+            <source src="media/robot-videos/visual_feedback/interact.mp4" 
+            type="video/mp4">
+          </video>
+          <p style="text-align:center">
+            Human-Robot Interaction
+          </p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Simulation -->
+<section class="section">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+
+
+    <!-- Animation. -->
+    <div class="rows is-centered ">
+      <div class="row is-full-width">
+        <!--/ Re-rendering. -->
+        <div class="container has-text-centered">
+          <h2 class="title is-3" style="margin-bottom: 1em;">Simulation Experiments</h2>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+
+            Blocks & Bowls
+            <div class="select is-small is-rounded">     
+              <select id="block-interative-menu" onchange="BlockUpdateInteractive()">
+              <option value="stack-blocks" selected="selected">"Stack Blocks"</option>
+              <option value="put-blocks-on-corner-side">"Put Blocks On Corner/Side"</option>
+              <option value="put-blocks-matching-colors">"Put Blocks Matching Colors"</option>
+              <option value="put-blocks-mismatching-colors">"Put Blocks Mismatching Colors"</option>
+              <option value="put-blocks-different-corners">"Put Blocks Different Corners"</option>
+              <option value="stack-blocks-cool-colors">"Stack Blocks Cool Colors"</option>
+              <option value="stack-blocks-warm-colors">"Stack Blocks Warm Colors"</option>
+              <option value="sort-primary-color-blocks">"Stack Primary Color Blocks"</option>
+              </select>
+            </div>
+          </div>
+          <div class="column has-text-centered">
+
+            Letters
+            <div class="select is-small is-rounded">     
+              <select id="letter-interative-menu" onchange="LetterUpdateInteractive()">
+              <option value="put-letters-alphabetical-order" selected="selected">"Put Letters Alphabetical Order"</option>
+              <option value="spell-word">"Spell Word"</option>
+              <option value="separate-vowels">"Separate Vowels"</option>
+              <option value="put-letters-reverse-alphabetical-order">"Put Letters Reverse Alphabetical Order"</option>
+              <option value="spell-sport">"Spell Sport"</option>
+              <option value="sort-symmetrical-letters">"Sort Symmetrical Letters"</option>
+              <option value="separate-consonants">"Separate Consonants"</option>
+              <option value="sort-letters-less-than-d">"Sort Letters Less Than d"</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="columns">
+          <div class="column is-half has-text-centered">
+            <p style="text-align:center;">
+              <video id="block-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+                <source src="media/simulation-videos/blocks-bowls/stack-blocks.mp4" type="video/mp4">
+              </video>
+            </p>
+            <p style="text-align:center" id="block-instruction">
+              Stack all the blocks
+            </p>
+          </div>
+          
+          <div class="column is-half has-text-centered">
+            <p style="text-align:center;">
+              <video id="letter-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+                <source src="media/simulation-videos/letters/put-letters-alphabetical-order.mp4" type="video/mp4">
+              </video>
+            </p>
+            <p style="text-align:center" id="letter-instruction">
+              Put the letters on the tables in alphabetical orders
+            </p>
+          </div>
+          
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+      <h2 class="title is-3">Emergent Behavioral Capabilities</h2>
+      
+      <p class="content has-text-justified">
+        <li><strong>Behavioral Commonsense Reasoning</strong>: During a task where robot is setting the table, the user can specify behavioral preferences such as “I am left-handed”, which requires the robot to comprehend its meaning in the context of the task. VoxPoser decides that it should move the fork from the right side of the bowl to the left side.</li>
+        <li><strong>Fine-grained Language Correction</strong>: For tasks that require high precision such as “covering the teapot with the lid”, the user can give precise instructions to the robot such as “you’re off by 1cm”. VoxPoser similarly adjusts its action based on the feedback.</li>
+        <li><strong>Multi-step Visual Program</strong>: Given a task “open the drawer precisely by half” where there is insufficient information because object models are not available, VoxPoser can come up with multi-step manipulation strategies based on visual feedback that first opens the drawer fully while recording handle displacement, then close it back to the midpoint to satisfy the requirement.</li>
+      </p>
+      <br>
+      <div style="text-align: center;">
+        <img src="media/figures/emergent.jpg" class="interpolation-image" style="width: 100%; height: auto;"/>
+      </div>
+    </div>
+
+  </div>
+
+</section> -->
+
+<!-- <section class="section">
+  <div class="container is-max-widescreen">
+  <div class="row">
+    <h2 class="title is-3">
+      Prompts
+    </h2>
+    <p class="content has-text-justified">
+        Prompts in Real-World Environments:
+        <br>
+        <a href="prompts/real_planner_prompt.txt">Planner</a> |
+        <a href="prompts/real_composer_prompt.txt">Composer</a> |
+        <a href="prompts/real_parse_query_obj_prompt.txt">Parse Query Object</a> |
+        <a href="prompts/real_get_affordance_map_prompt.txt">Get Affordance Maps</a> |
+        <a href="prompts/real_get_avoidance_map_prompt.txt">Get Avoidance Maps</a> |
+        <a href="prompts/real_get_rotation_map_prompt.txt">Get Rotation Maps</a> |
+        <a href="prompts/real_get_velocity_map_prompt.txt">Get Velocity Maps</a> |
+        <a href="prompts/real_get_gripper_map_prompt.txt">Get Gripper Maps</a>
+    </p>
+    <p class="content has-text-justified">
+        Prompts in Simulation Environments (planners are not used in simulation):
+        <br>
+        <a href="prompts/sim_composer_prompt.txt">Composer</a> |
+        <a href="prompts/sim_parse_query_obj_prompt.txt">Parse Query Object</a> |
+        <a href="prompts/sim_get_affordance_map_prompt.txt">Get Affordance Maps</a> |
+        <a href="prompts/sim_get_avoidance_map_prompt.txt">Get Avoidance Maps</a> |
+        <a href="prompts/sim_get_rotation_map_prompt.txt">Get Rotation Maps</a> |
+        <a href="prompts/sim_get_velocity_map_prompt.txt">Get Velocity Maps</a> |
+        <a href="prompts/sim_get_gripper_map_prompt.txt">Get Gripper Maps</a>
+    </p>
+  </div>
+  </div>
+</section> -->
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-widescreen content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{huang2023voxposer,
+      title={VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models},
+      author={Huang, Wenlong and Wang, Chen and Zhang, Ruohan and Li, Yunzhu and Wu, Jiajun and Fei-Fei, Li},
+      journal={arXiv preprint arXiv:2307.05973},
+      year={2023}
+    }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a href="https://github.com/voxposer/voxposer.github.io">VoxPoser</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
