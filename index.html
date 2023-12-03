@@ -46,13 +46,13 @@
       img.src = "media/robot-videos/versatile_goals/goal-images/" + task + ".jpg"
       var goal_type = document.getElementById("goal-type");
       if (task == "fruit-platter" || task == "sushi") {
-        goal_type.innerHTML = "Goal Type: Real Image";
+        goal_type.innerHTML = "Real Image";
       } else if (task == "jigsaw" || task == "sketch") {
-        goal_type.innerHTML = "Goal Type: Drawing";
+        goal_type.innerHTML = "Drawing";
       } else if (task == "make-table") {
-        goal_type.innerHTML = "Goal Type: Image + Language";
+        goal_type.innerHTML = "Image + Language";
       } else {
-        goal_type.innerHTML = "Goal Type: Pointing Finger";
+        goal_type.innerHTML = "Pointing Finger";
       }
     }
 
@@ -191,15 +191,15 @@
             </span>
 
             <!-- Video Link. -->
-            <!-- <span class="link-block">
-              <a target="_blank" href="https://youtu.be/Yvn4eR05A3M"
+            <span class="link-block">
+              <a target="_blank" href="https://youtu.be/t8pPZ46xtuc"
                  class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                     <i class="fab fa-youtube"></i>
                 </span>
                 <span>Video</span>
               </a>
-            </span> -->
+            </span>
 
             <!-- Code Link. -->
             <span class="link-block">
@@ -225,7 +225,7 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-vcentered  is-centered">
-          <video id="teaser" autoplay muted loop height="70%" width="70%">
+          <video id="teaser" autoplay muted loop height="70%" width="70%" controlsList="nodownload">
             <source src="media/videos/teaser_video.mp4"
                     type="video/mp4">
           </video>
@@ -248,67 +248,67 @@
       <div id="results-carousel" class="carousel results-carousel">
         
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/spatial-layout/take-marvel-model-1.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/spatial-layout/bring-empty-plate.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item">
-           <video poster="" autoplay muted loop height="100%">
+           <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
              <source src="media/robot-videos/spatial-layout/pour-chips-unseen.mp4"
                      type="video/mp4">
            </video>
          </div>
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/complex-attribute/art-class.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/complex-attribute/righteous-character.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/complex-attribute/stack-plates.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/versatile_goals/sushi.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/versatile_goals/point-plate.mp4"
                     type="video/mp4">
           </video>
         </div>
        <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/versatile_goals/make-table.mp4"
                     type="video/mp4">
           </video>
         </div>
        <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/visual_feedback/find-stapler-2.mp4"
                     type="video/mp4">
           </video>
         </div>
        <div class="item">
-          <video poster="" autoplay muted loop height="100%">
+          <video poster="" autoplay muted loop height="100%" controlsList="nodownload">
             <source src="media/robot-videos/visual_feedback/interact.mp4"
                     type="video/mp4">
           </video>
@@ -351,7 +351,9 @@
   </div>
 
   <!-- Paper video. -->
-  <!-- <br>
+  <br>
+  <br>
+  <br>
   <br>
 
   <div class="container is-max-widescreen">
@@ -360,11 +362,11 @@
       <div class="container has-text-centered"><h2 class="title is-3" style="margin-bottom: 1em;">Video</h2></div>
       
       <div class="publication-video">
-        <iframe src="https://www.youtube.com/embed/Yvn4eR05A3M"
+        <iframe src="https://www.youtube.com/embed/t8pPZ46xtuc"
                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
-  </div> -->
+  </div>
 
 </section>
 
@@ -389,7 +391,7 @@
         </div>
         <!-- <img src="media/videos/method_figure.gif" class="interpolation-image" /> -->
         <!-- <img src="media/figures/method.jpg" class="interpolation-image" /> -->
-        <video src="media/videos/method.mp4" class="interpolation-image" loop autoplay muted></video>
+        <video src="media/videos/method.mp4" class="interpolation-image" loop autoplay muted controlsList="nodownload"></video>
           <p class="content has-text-justified">
             Given a language instruction and current visual observation, we leverage a VLM (GPT-4V) to comprehend the environment scene through chain-of-thought reasoning, subsequently generating a sequence of actionable steps. The first step of this plan is then executed by a primitive policy. Finally, the step that has been executed is added to the finished plan, enabling a closed-loop planning method in dynamic environments.
           </p>
@@ -412,12 +414,10 @@
               <select id="spatial_layout-interative-menu" onchange="SpatialUpdateInteractive()">
               <option value="pour-chips-unseen" selected="selected">"Pour Chips V1"</option>
               <option value="pour-chips-seen">"Pour Chips V2"</option>
-              <option value="bring-pepsi-unseen">"Bring Pepsi Can V1"</option>
-              <option value="bring-pepsi-unseen-2">"Bring Pepsi Can V2"</option>
-              <option value="bring-pepsi-seen">"Bring Pepsi Can V3"</option>
+              <option value="bring-pepsi-unseen-2">"Bring Pepsi Can V1"</option>
+              <option value="bring-pepsi-seen">"Bring Pepsi Can V2"</option>
               <option value="take-marvel-model-1">"Take Out Marvel Model V1"</option>
-              <option value="take-marvel-model-2">"Take Out Marvel Model V2"</option>
-              <option value="take-marvel-model-3">"Take Out Marvel Model V3"</option>
+              <option value="take-marvel-model-3">"Take Out Marvel Model V2"</option>
               <option value="bring-empty-plate">"Bring Empty Plate"</option>
               </select>
             </div>
@@ -428,8 +428,8 @@
             <div class="select is-small is-rounded">     
               <select id="complex_attribute-interative-menu" onchange="AttributeUpdateInteractive()">
               <option value="righteous-character" selected="selected">"Pick Righteous Characters"</option>
-              <option value="fresh-fruit-1">"Pick Fresh Fruits V1"</option>
-              <option value="fresh-fruit-2">"Pick Fresh Fruits V2"</option>
+              <option value="fresh-fruit-1">"Pick Fresh Fruits"</option>
+              <!-- <option value="fresh-fruit-2">"Pick Fresh Fruits V2"</option> -->
               <option value="stack-plates">"Stack Plates Steadily"</option>
               <option value="art-class">"Prepare Art Class"</option>
               <option value="put-object-in-box">"Fit Objects In Box"</option>
@@ -444,14 +444,14 @@
         <div class="columns">
           <div class="column is-half has-text-centered">
             <p style="text-align:center;">
-              <video id="spatial_layout-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+              <video id="spatial_layout-interactive-video" width="100%" height="100%" controls autoplay loop muted controlsList="nodownload">
                 <source src="media/robot-videos/spatial-layout/pour-chips-unseen.mp4" type="video/mp4">
               </video>
             </p>
           </div>
           <div class="column is-half has-text-centered">
             <p style="text-align:center;">
-              <video id="complex_attribute-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+              <video id="complex_attribute-interactive-video" width="100%" height="100%" controls autoplay loop muted controlsList="nodownload">
                 <source src="media/robot-videos/complex-attribute/righteous-character.mp4" type="video/mp4">
               </video>
             </p>
@@ -475,7 +475,7 @@
         <div class="columns">
           <div class="column has-text-centered">
 
-            Versatile Goals 
+            Tasks 
             <div class="select is-small is-rounded">     
               <select id="goal-interative-menu" onchange="GoalUpdateInteractive()">
               <option value="sushi" selected="selected">"Arrange sushi"</option>
@@ -499,13 +499,13 @@
             <p style="text-align:center">
               Goal Image
             </p>
-            <p style="text-align:center" id="goal-type">
-              Goal Type: Real Image
+            <p style="text-align:center">
+              Goal Type: <span style="color:red" id="goal-type">Real Image</span>
             </p>
           </div>
           <div class="column is-8 has-text-centered">
             <p style="text-align:center;">
-              <video id="versatile_goals-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+              <video id="versatile_goals-interactive-video" width="100%" height="100%" controls autoplay loop muted controlsList="nodownload">
                 <source src="media/robot-videos/versatile_goals/sushi.mp4" type="video/mp4">
               </video>
             </p>
@@ -536,7 +536,7 @@
             controls
             muted
             autoplay
-            loop
+            loop controlsList="nodownload"
             width="99%">
             <source src="media/robot-videos/visual_feedback/stack-blocks-1.mp4" 
             type="video/mp4">
@@ -551,7 +551,7 @@
             controls
             muted
             autoplay
-            loop
+            loop controlsList="nodownload"
             width="99%">
             <source src="media/robot-videos/visual_feedback/interfere.mp4" 
             type="video/mp4">
@@ -568,7 +568,7 @@
             controls
             muted
             autoplay
-            loop
+            loop controlsList="nodownload"
             width="99%">
             <source src="media/robot-videos/visual_feedback/find-cat-food-1.mp4" 
             type="video/mp4">
@@ -583,7 +583,7 @@
             controls
             muted
             autoplay
-            loop
+            loop controlsList="nodownload"
             width="99%">
             <source src="media/robot-videos/visual_feedback/interact.mp4" 
             type="video/mp4">
@@ -652,7 +652,7 @@
         <div class="columns">
           <div class="column is-half has-text-centered">
             <p style="text-align:center;">
-              <video id="block-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+              <video id="block-interactive-video" width="100%" height="100%" controls autoplay loop muted controlsList="nodownload">
                 <source src="media/simulation-videos/blocks-bowls/stack-blocks.mp4" type="video/mp4">
               </video>
             </p>
@@ -663,7 +663,7 @@
           
           <div class="column is-half has-text-centered">
             <p style="text-align:center;">
-              <video id="letter-interactive-video" width="100%" height="100%" controls autoplay loop muted>
+              <video id="letter-interactive-video" width="100%" height="100%" controls autoplay loop muted controlsList="nodownload">
                 <source src="media/simulation-videos/letters/put-letters-alphabetical-order.mp4" type="video/mp4">
               </video>
             </p>
